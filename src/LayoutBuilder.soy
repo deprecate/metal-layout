@@ -1,23 +1,30 @@
 {namespace LayoutBuilder}
 
 /**
-* @param rows
-*/
+ * @param? breakpoints_
+ * @param rows
+ */
 {template .render}
 	<div class="layout-builder">
-		{foreach $row in ($rows)}
-			<div class="row layout-builder-row">
-				<button
-					type="button"
-					class="btn btn-default layout-builder-remove-row"
-					data-index="{index($row)}"
-					data-onclick="handleClickRemove_">
-					<span class="glyphicon glyphicon-trash"></span>
-				</button>
-				{foreach $column in ($row.columns)}
-					{call LayoutCol.render data="$column" /}
-				{/foreach}
-			</div>
-		{/foreach}
+			{foreach $row in ($rows)}
+				{let $index: index($row) /}
+				<div class="row layout-builder-row">
+					<div class="layout-builder-controls">
+						<button
+							type="button"
+							class="btn btn-default layout-builder-remove-row"
+							data-index="{$index}"
+							data-onclick="handleClickRemove_">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+						{call LayoutColResizer.render}
+							{param breakpoints: $breakpoints_ ? $breakpoints_[$index] : [] /}
+						{/call}
+					</div>
+					{foreach $column in ($row.columns)}
+						{call LayoutCol.render data="$column" /}
+					{/foreach}
+				</div>
+			{/foreach}
 	</div>
 {/template}

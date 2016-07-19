@@ -1,0 +1,19 @@
+{namespace LayoutColResizer}
+
+/**
+ * @param? breakpoints
+ */
+{template .render}
+	<div class="layout-col-resizer">
+		{for $i in range(13)}
+			<div class="layout-col-resizer-breakpoint" style="left:{($i * 100)/12}%;">
+				<div class="layout-col-resizer-breakpoint-line"></div>
+				{let $show: $breakpoints ? $breakpoints[$i] : false /}
+				<div class="layout-col-resizer-breakpoint-handle {$show ? '' : 'hide'}">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</div>
+			</div>
+		{/for}
+	</div>
+{/template}
