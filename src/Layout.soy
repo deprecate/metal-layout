@@ -1,16 +1,16 @@
 {namespace Layout}
 
 /**
-* @param data
+* @param rows
 */
 {template .render}
 	<div class="layout">
-			{foreach $value in ($data)}
-				<div class="row">
-					{foreach $column in ($value.columns)}
-						{call LayoutCol.render data="$column" /}
-					{/foreach}
-				</div>
-			{/foreach}
+		{foreach $row in ($rows)}
+			<div class="row">
+				{foreach $column in ($row.columns)}
+					{call LayoutCol.render data="$column" /}
+				{/foreach}
+			</div>
+		{/foreach}
 	</div>
 {/template}
